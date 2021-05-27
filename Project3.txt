@@ -1,0 +1,139 @@
+package com.company;
+
+import java.util.Scanner;
+
+class Library{
+    String[] books;
+    int[] bookId;
+    int no_of_books;
+    public Library() {
+        this.books = new String[100];
+        this.bookId = new int[100];
+        this.no_of_books = 0;
+    }
+    void addBooks(String book,int bookId){
+        this.books[no_of_books] = book;
+        this.bookId[no_of_books] = bookId;
+        no_of_books++;
+       // System.out.println(book+ " book has been added!");
+    }
+    void showAvailableBooks() {
+        System.out.println("Available books are:");
+        for (String book : this.books) {
+            if (book == null) {
+                continue;
+            }
+            System.out.println("* " + book);
+        }
+    }
+    void issueBooks(int bookId){
+        for (int i =0; i < this.bookId.length; i++){
+            if (this.bookId[i] == (bookId)){
+                System.out.println(bookId+": book has been issued!");
+                this.books[i] = null;
+                return;
+            }
+
+        }
+        System.out.println("This book does not exist");
+    }
+    void returnBooks(int bookId){
+        this.bookId[no_of_books] = bookId;
+        no_of_books++;
+        System.out.println("The book "+bookId+" is returned");
+
+    }
+}
+
+
+public class JAVA_PROJECT_2 {
+    public static void main(String[] args) {
+        Library centralLibrary = new Library();
+        System.out.println("Welcome to Priyanshu Chaudhary library!");
+        centralLibrary.addBooks("Think and Grow Rich\nBookId:1",1);
+        centralLibrary.addBooks("Inner voice\nBookId:2",2);
+        centralLibrary.addBooks("Quest for Light\nBookId:3",3);
+        centralLibrary.addBooks("Spiritual Path\nBookId:4",4);
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Press 1 to check available books\n" +
+                "Press 2 issue book\n" +
+                "Press 3 to return book");
+        int n = sc.nextInt();
+
+        switch (n) {
+            case 1:
+                centralLibrary.showAvailableBooks();
+                System.out.println("If you want to continue then Press ENTER otherwise Press any key");
+                if(sc.next().equals("ENTER")){
+                    System.out.println("Press 1 issue book\n" +
+                            "Press 2 to return book");
+                    int p = sc.nextInt();
+                    if (p==1){
+                        System.out.println("Enter Book-Id for issue book");
+                        centralLibrary.issueBooks(sc.nextInt());
+                        break;
+                    }
+                    else if (p==2){
+                        System.out.println("Enter Book-Id to return book");
+                        centralLibrary.returnBooks(sc.nextInt());
+                        break;
+                    }
+                    else
+                        System.out.println("Invalid input");
+                }
+                else
+                    break;
+
+            case 2:
+                System.out.println("Enter Book-Id for issue book");
+                centralLibrary.issueBooks(sc.nextInt());
+                System.out.println("If you want to continue then Press ENTER otherwise Press any key");
+                if(sc.next().equals("ENTER")){
+                    System.out.println("Press 1 issue book\n" +
+                            "Press 2 to return book");
+                    int l = sc.nextInt();
+                    if (l==1){
+                        System.out.println("Enter Book-Id for issue book");
+                        centralLibrary.issueBooks(sc.nextInt());
+                        break;
+                    }
+                    else if (l==2){
+                        System.out.println("Enter Book-Id to return book");
+                        centralLibrary.returnBooks(sc.nextInt());
+                        break;
+                    }
+                    else
+                        System.out.println("Invalid input");
+                }
+                else
+                    break;
+
+
+            case 3:
+                System.out.println("Enter Book-Id to return book");
+                centralLibrary.returnBooks(sc.nextInt());
+                if(sc.next().equals("ENTER")){
+                    System.out.println("Press 1 issue book\n" +
+                            "Press 2 to return book");
+                    if (sc.nextInt()==1){
+                        System.out.println("Enter Book-Id for issue book");
+                        centralLibrary.issueBooks(sc.nextInt());
+                        break;
+                    }
+                    else if (sc.nextInt()==2){
+                        System.out.println("Enter Book-Id to return book");
+                        centralLibrary.returnBooks(sc.nextInt());
+                        break;
+                    }
+                    else
+                        System.out.println("Invalid input");
+                }
+                else
+                    break;
+            default:
+                System.out.println("Invalid input");
+                break;
+        }
+    }
+}
